@@ -1,7 +1,12 @@
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-// get telegram web app user id
-const token = (window as any).Telegram?.WebApp?.initDataUnsafe?.user?.id;
+declare global {
+  interface Window {
+    Telegram: any;
+  }
+}
+
+const token = window.Telegram?.WebApp?.initDataUnsafe?.user?.id;
 
 function authRequestInterceptor(config: AxiosRequestConfig) {
   const defaultCompany = localStorage.getItem('default-company');
