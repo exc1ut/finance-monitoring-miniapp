@@ -13,7 +13,7 @@ function authRequestInterceptor(config: AxiosRequestConfig) {
 
   if (token) {
     //@ts-ignore
-    config.headers.Authorization = `${token}`;
+    config.headers.Authorization = token;
   }
 
   if (defaultCompany) {
@@ -37,11 +37,6 @@ axios.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    if (error instanceof AxiosError) {
-      if (error.response?.status === 401) {
-        window.location.reload();
-      }
-    }
     return Promise.reject(error);
   }
 );
